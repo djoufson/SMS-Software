@@ -23,7 +23,7 @@ public static class DependencyInjection
         if(await db.Users.AnyAsync())
             return app;
 
-        var user = Admin.Create("Admin", "Admin", Email.Create("admin@email.com")!, Password.CreateNewPassword("string")!, "", "", "", "", "", false, "", "");
+        var user = Admin.Create("Admin", "Admin", Email.Create("admin@email.com")!, Password.CreateNewPassword("string")!, "", "", "", "", "", "", "");
 
         await authManager.AddToRoleAsync(user, Roles.Admin);
 

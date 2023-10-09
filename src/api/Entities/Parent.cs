@@ -17,9 +17,8 @@ public sealed class Parent : User
         string zipCode,
         string province,
         string telephone,
-        bool inactive,
         string personalId,
-        string image) : base(id, firstName, lastName, email, password, street, city, zipCode, province, telephone, inactive, personalId, image)
+        string image) : base(id, firstName, lastName, email, password, street, city, zipCode, province, telephone, personalId, image)
     {
     }
 
@@ -37,7 +36,6 @@ public sealed class Parent : User
         string zipCode,
         string province,
         string telephone,
-        bool inactive,
         string personalId,
         string image)
     {
@@ -52,7 +50,6 @@ public sealed class Parent : User
             zipCode,
             province,
             telephone,
-            inactive,
             personalId,
             image);
     }

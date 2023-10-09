@@ -13,7 +13,7 @@ public abstract class User : Entity<string>
     public string ZipCode { get; private set; }
     public string Province { get; private set; }
     public string Telephone { get; private set; }
-    public bool Inactive { get; private set; }
+    public bool Inactive { get; private set; } 
     public string PersonalId { get; private set; }
     public string Image { get; private set; }
     public ICollection<Role> Roles { get; protected set; } = new List<Role>();
@@ -29,7 +29,6 @@ public abstract class User : Entity<string>
         string zipCode,
         string province,
         string telephone,
-        bool inactive,
         string personalId,
         string image) : base(id)
     {
@@ -42,7 +41,7 @@ public abstract class User : Entity<string>
         ZipCode = zipCode;
         Province = province;
         Telephone = telephone;
-        Inactive = inactive;
+        Inactive = true;
         PersonalId = personalId;
         Image = image;
     }
@@ -55,6 +54,7 @@ public abstract class User : Entity<string>
     public bool ChangePassword(Password password)
     {
         Password = password;
+        Inactive = false;
         return true;
     }
 
