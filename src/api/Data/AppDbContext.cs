@@ -1,4 +1,5 @@
 using api.Entities;
+using api.Entities.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Data;
@@ -11,6 +12,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<Sanction> Sanctions { get; set; }
     public DbSet<Secretary> Secretaries { get; set; }
     public DbSet<Student> Students { get; set; }
+    public DbSet<User> Users { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
