@@ -1,0 +1,34 @@
+version: '3.3'
+
+services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: src/Api/Dockerfile
+    depends_on:
+      - mssql
+    ports:
+      - 80
+      - 443
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+  mssql:
+    container_name: mssql
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: always
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Contraseña12345678"
+    ports:
+      - 1433:1433
+    volumes:
+      - my-volume:/var/opt/mssql
+volumes:
+  my-volume:
