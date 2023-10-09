@@ -1,10 +1,10 @@
 using System.Security.Claims;
 using api.Entities.ValueObjects;
-using api.Services.Authentication.Errors;
+using api.Services.Features.Authentication.Errors;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace api.Services.Authentication;
+namespace api.Services.Features.Authentication;
 
 public partial class AuthService
 {
@@ -17,12 +17,12 @@ public partial class AuthService
             .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
 
         if(user is null)
-            return Result.Fail(new UserNotFoundError());
+            return Result.Fail(AuthErrors.UserNotFoundError);
 
         // Check the password
         var password = Password.CreateNewPassword(request.Password);
         if(user.Password != password)
-            return Result.Fail(new BadCredentialsError());
+            return Result.Fail(AuthErrors.BadCredentialsError);
 
         // Generate token
         var claims = new List<Claim>()

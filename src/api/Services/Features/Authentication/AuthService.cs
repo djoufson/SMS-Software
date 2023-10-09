@@ -1,7 +1,7 @@
 using api.Data;
 using api.Services.Abstractions;
 
-namespace api.Services.Authentication;
+namespace api.Services.Features.Authentication;
 
 public partial class AuthService
 {

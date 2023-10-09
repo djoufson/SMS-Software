@@ -1,5 +1,6 @@
 using System.Text;
 using api.Data;
+using api.Middlewares;
 using api.Services;
 using api.Services.Settings;
 using api.Utilities;
@@ -18,6 +19,7 @@ public static class DependencyInjection
         services.AddCors();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+        services.AddScoped<RegisterUserIdMiddleware>();
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
         return services;
     }
@@ -68,6 +70,8 @@ public static class DependencyInjection
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
+
+        app.UseMiddleware<RegisterUserIdMiddleware>();
 
         app.MapControllers();
 
