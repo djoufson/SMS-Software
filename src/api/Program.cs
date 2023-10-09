@@ -1,4 +1,4 @@
-using Api;
+using api;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.RegisterServices();

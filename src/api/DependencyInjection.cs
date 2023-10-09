@@ -1,9 +1,11 @@
-namespace Api;
+using api.Data;
+namespace api;
 
 public static class DependencyInjection
 {
     public static IServiceCollection RegisterServices(this IServiceCollection services)
     {
+        services.AddPersistence();
         services.AddControllers();
         services.AddCors();
         services.AddEndpointsApiExplorer();
