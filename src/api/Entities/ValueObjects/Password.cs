@@ -27,8 +27,8 @@ public sealed record Password : ValueObject
     private static bool ValidatePassword(string password)
     {
         return
-            !string.IsNullOrEmpty(password) &&
-            password.Length >= 6;
+            !string.IsNullOrEmpty(password); // &&
+            // password.Length >= 6;
     }
 
     private static string HashPassword(string password)

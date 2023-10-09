@@ -30,7 +30,7 @@ public sealed class Student : User
     private Student()
     {}
 
-    public User Create(
+    public static User Create(
         Parent? parent,
         string firstName,
         string lastName,

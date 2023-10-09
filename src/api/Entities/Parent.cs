@@ -27,7 +27,7 @@ public sealed class Parent : User
     private Parent()
     {}
 
-    public User Create(
+    public static User Create(
         string firstName,
         string lastName,
         Email email,

@@ -26,5 +26,9 @@ public sealed class UserConfigurations : IEntityTypeConfiguration<User>
                 pwd => pwd.Value,
                 value => Password.CreateFromHash(value)
             );
+
+        builder
+            .HasMany(u => u.Roles)
+            .WithMany(r => r.Users);
     }
 }

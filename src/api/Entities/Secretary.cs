@@ -27,7 +27,7 @@ public sealed class Secretary : User
     private Secretary()
     {}
 
-    public User Create(
+    public static User Create(
         string firstName,
         string lastName,
         Email email,

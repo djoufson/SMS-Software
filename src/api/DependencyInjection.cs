@@ -51,10 +51,11 @@ public static class DependencyInjection
         return services;
     }
 
-    public static WebApplication ConfigurePipeline(this WebApplication app)
+    public static async Task<WebApplication> ConfigurePipeline(this WebApplication app)
     {
         if (app.Environment.IsDevelopment())
         {
+            await app.SeedDataAsync();
             app.UseSwagger();
             app.UseSwaggerUI();
         }

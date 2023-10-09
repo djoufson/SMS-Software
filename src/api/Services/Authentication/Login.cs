@@ -12,7 +12,9 @@ public partial class AuthService
     {
         // Get the user with specified email
         var email = Email.Create(request.Email);
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
+        var user = await _context.Users
+            .Include(u => u.Roles)
+            .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
 
         if(user is null)
             return Result.Fail(new UserNotFoundError());
