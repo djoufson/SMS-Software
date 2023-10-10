@@ -10,11 +10,14 @@ namespace api;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection RegisterServices(
+        this IServiceCollection services,
+        IConfiguration configuration,
+        IHostEnvironment env)
     {
         services.AddAuth(configuration);
         services.AddServices();
-        services.AddPersistence();
+        services.AddPersistence(configuration, env);
         services.AddControllers();
         services.AddCors();
         services.AddEndpointsApiExplorer();
@@ -53,21 +56,17 @@ public static class DependencyInjection
         return services;
     }
 
-    public static async Task<WebApplication> ConfigurePipeline(this WebApplication app)
+    public static WebApplication ConfigurePipeline(this WebApplication app)
     {
-        if (app.Environment.IsDevelopment())
-        {
-            await app.SeedDataAsync();
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
         app.UseCors(cfg =>
         {
             cfg.AllowAnyOrigin();
         });
 
-        app.UseHttpsRedirection();
+        // app.UseHttpsRedirection();
 
         app.UseAuthorization();
 

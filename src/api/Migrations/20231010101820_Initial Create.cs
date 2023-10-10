@@ -14,8 +14,8 @@ namespace api.Migrations
                 name: "Roles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Designation = table.Column<string>(type: "TEXT", nullable: false)
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    Designation = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -23,32 +23,32 @@ namespace api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", nullable: false),
-                    Email = table.Column<string>(type: "TEXT", nullable: false),
-                    Password = table.Column<string>(type: "TEXT", nullable: false),
-                    Street = table.Column<string>(type: "TEXT", nullable: false),
-                    City = table.Column<string>(type: "TEXT", nullable: false),
-                    ZipCode = table.Column<string>(type: "TEXT", nullable: false),
-                    Province = table.Column<string>(type: "TEXT", nullable: false),
-                    Telephone = table.Column<string>(type: "TEXT", nullable: false),
-                    Inactive = table.Column<bool>(type: "INTEGER", nullable: false),
-                    PersonalId = table.Column<string>(type: "TEXT", nullable: false),
-                    Image = table.Column<string>(type: "TEXT", nullable: false),
-                    Discriminator = table.Column<string>(type: "TEXT", nullable: false),
-                    ParentId = table.Column<string>(type: "TEXT", nullable: true)
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    FirstName = table.Column<string>(type: "text", nullable: false),
+                    LastName = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false),
+                    Street = table.Column<string>(type: "text", nullable: false),
+                    City = table.Column<string>(type: "text", nullable: false),
+                    ZipCode = table.Column<string>(type: "text", nullable: false),
+                    Province = table.Column<string>(type: "text", nullable: false),
+                    Telephone = table.Column<string>(type: "text", nullable: false),
+                    Inactive = table.Column<bool>(type: "boolean", nullable: false),
+                    PersonalId = table.Column<string>(type: "text", nullable: false),
+                    Image = table.Column<string>(type: "text", nullable: false),
+                    Discriminator = table.Column<string>(type: "text", nullable: false),
+                    ParentId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_User_User_ParentId",
+                        name: "FK_Users_Users_ParentId",
                         column: x => x.ParentId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -56,8 +56,8 @@ namespace api.Migrations
                 name: "RoleUser",
                 columns: table => new
                 {
-                    RolesId = table.Column<string>(type: "TEXT", nullable: false),
-                    UsersId = table.Column<string>(type: "TEXT", nullable: false)
+                    RolesId = table.Column<string>(type: "text", nullable: false),
+                    UsersId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,9 +69,9 @@ namespace api.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RoleUser_User_UsersId",
+                        name: "FK_RoleUser_Users_UsersId",
                         column: x => x.UsersId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -80,24 +80,24 @@ namespace api.Migrations
                 name: "Sanctions",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Motif = table.Column<string>(type: "TEXT", nullable: false),
-                    Amount = table.Column<decimal>(type: "TEXT", nullable: false),
-                    StudentId = table.Column<string>(type: "TEXT", nullable: true),
-                    SecretaryId = table.Column<string>(type: "TEXT", nullable: true)
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    Motif = table.Column<string>(type: "text", nullable: false),
+                    Amount = table.Column<decimal>(type: "numeric", nullable: false),
+                    StudentId = table.Column<string>(type: "text", nullable: true),
+                    SecretaryId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sanctions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sanctions_User_SecretaryId",
+                        name: "FK_Sanctions_Users_SecretaryId",
                         column: x => x.SecretaryId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Sanctions_User_StudentId",
+                        name: "FK_Sanctions_Users_StudentId",
                         column: x => x.StudentId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -117,18 +117,18 @@ namespace api.Migrations
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_Email",
-                table: "User",
+                name: "IX_Users_Email",
+                table: "Users",
                 column: "Email");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_ParentId",
-                table: "User",
+                name: "IX_Users_ParentId",
+                table: "Users",
                 column: "ParentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_PersonalId",
-                table: "User",
+                name: "IX_Users_PersonalId",
+                table: "Users",
                 column: "PersonalId");
         }
 
@@ -145,7 +145,7 @@ namespace api.Migrations
                 name: "Roles");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }
