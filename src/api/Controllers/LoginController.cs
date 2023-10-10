@@ -17,7 +17,8 @@ public class LoginController : ApiController
     }
 
     [HttpPost("authenticate")]
-    public async Task<ActionResult<LoginResponse>> Login(LoginRequest request)
+    [ProducesResponseType(typeof(LoginResponse), StatusCodes.Status200OK)]
+    public async Task<IActionResult> Login(LoginRequest request)
     {
         var response = await _authService.Login(request);
         if(response.IsFailed)
@@ -28,7 +29,8 @@ public class LoginController : ApiController
 
     [Authorize]
     [HttpPut("password")]
-    public async Task<ActionResult<ChangePasswordResponse>> ChangePassword(ChangePasswordRequest requestDto)
+    [ProducesResponseType(typeof(ChangePasswordResponse), StatusCodes.Status200OK)]
+    public async Task<IActionResult> ChangePassword(ChangePasswordRequest requestDto)
     {
         var userId = Headers.GetUserId(Request.Headers);
         var request = new ChangePasswordCommand(userId, requestDto.Password, requestDto.NewPassword);
@@ -41,6 +43,7 @@ public class LoginController : ApiController
 
     [HttpPut("reset/password/{email}")]
     [Authorize(Policy = Policies.AdminOnly)]
+    [ProducesResponseType(typeof(ResetPasswordResponse), StatusCodes.Status200OK)]
     public async Task<IActionResult> ResetPassword(string email, ResetPasswordRequest request)
     {
         var adminId = Headers.GetUserId(Request.Headers);

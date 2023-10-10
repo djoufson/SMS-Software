@@ -18,6 +18,7 @@ public class UsersController : ApiController
 
     [HttpPost("register")]
     [Authorize(Policy = Policies.AdminOnly)]
+    [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
     public async Task<IActionResult> Register(RegisterUserRequest request)
     {
         var userId = Headers.GetUserId(Request.Headers);
