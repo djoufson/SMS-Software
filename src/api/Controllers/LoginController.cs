@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using api.Utilities;
 using api.Services.Features.Authentication;
+using api.Services.Features.Authentication.Errors;
 
 namespace api.Controllers;
 
@@ -36,5 +37,25 @@ public class LoginController : ApiController
             return BadRequest(response.Errors.Select(e => e.Message));
 
         return Ok(response.Value);
+    }
+
+    [HttpPut("reset/password/{email}")]
+    [Authorize(Policy = Policies.AdminOnly)]
+    public async Task<IActionResult> ResetPassword(string email, ResetPasswordRequest request)
+    {
+        var adminId = Headers.GetUserId(Request.Headers);
+        var command = new ResetPasswordCommand(adminId, email, request.Password);
+        var response = await _authService.ResetPassword(command);
+
+        if(response.IsSuccess)
+            return Ok(response.Value);
+
+        var error = response.Errors.Select(e => e.Message);
+        return response.Errors.First() switch
+        {
+            BadCredentialsError or PasswordRequirementsError => BadRequest(error),
+            UserNotFoundError => NotFound(error),
+            _ => Problem()
+        };
     }
 }
