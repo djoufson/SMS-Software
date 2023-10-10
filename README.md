@@ -8,8 +8,10 @@ It is a practical example of real world application of .NET and React JS technol
 ### Docker
 
 ## Members
-| Names                       | Identifier  |
-|:----------------------------|:------------|
-| CHE BENE FOMEGUEU DJOUFSON  | 19G00266    |
-| TEMAMEU VADIL               |             |
-| ENAME PRISO                 |             |
+| Names                      | Identifier |
+|:---------------------------|:-----------|
+| CHE BENE FOMEGUEU DJOUFSON | 19G00266   |
+| TEMAMEU VADIL              |            |
+| ENAME PRISO                | 21G00783   |
+| NGUETCHO WILLIAM           | 21GOO796   |
+| NGUMGO FIDELE              | 19G00105   |

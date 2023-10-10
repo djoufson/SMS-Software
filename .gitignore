@@ -6,6 +6,10 @@
 # Vs and Vs code config files
 .vscode/
 .vs/
+.idea/
+
+# Apple specific files
+*.DS_Store
 
 # User-specific files
 *.rsuser
