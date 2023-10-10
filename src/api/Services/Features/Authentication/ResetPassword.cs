@@ -9,11 +9,6 @@ public partial class AuthService
 {
     public async Task<Result<ResetPasswordResponse>> ResetPassword(ResetPasswordCommand request)
     {
-        // Get the authenticated admin
-        var admin = await _context.Admins.FindAsync(request.AdminId);
-        if(admin is null)
-            return Result.Fail(AuthErrors.BadCredentialsError);
-
         // Get the requested user
         var email = Email.Create(request.UserEmail);
         var student = await _context.Students.FirstOrDefaultAsync(u => u.Email == email);
@@ -37,7 +32,6 @@ public record ResetPasswordResponse(
     bool Status
 );
 public record ResetPasswordCommand(
-    string AdminId,
     string UserEmail,
     string Password
 );

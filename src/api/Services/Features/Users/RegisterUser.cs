@@ -1,7 +1,6 @@
 using api.Entities;
 using api.Entities.Base;
 using api.Entities.ValueObjects;
-using api.Services.Features.Authentication.Errors;
 using api.Services.Features.Users.Errors;
 using api.Utilities;
 using FluentResults;
@@ -13,11 +12,6 @@ public partial class UserService
 {
     public async Task<Result<UserResponse>> Register(RegisterUserCommand request)
     {
-        // Get the admin by his Id
-        var admin = await _context.Admins.FindAsync(request.UserId);
-        if(admin is null)
-            return Result.Fail(AuthErrors.UserNotFoundError);
-
         // Check the uniqueness of the email
         var email = Email.Create(request.Request.Email);
         var exists = await _context.Users.AnyAsync(u => u.Email == email);
@@ -55,6 +49,7 @@ public partial class UserService
             user.Province,
             user.Telephone,
             user.PersonalId,
+            user.Inactive,
             user.Image);
     }
 
@@ -87,10 +82,10 @@ public record UserResponse(
     string Province,
     string Telephone,
     string PersonalId,
+    bool Inactive,
     string Image);
 
 public record RegisterUserCommand(
-    string UserId,
     RegisterUserRequest Request
 );
 

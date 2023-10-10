@@ -46,8 +46,7 @@ public class LoginController : ApiController
     [ProducesResponseType(typeof(ResetPasswordResponse), StatusCodes.Status200OK)]
     public async Task<IActionResult> ResetPassword(string email, ResetPasswordRequest request)
     {
-        var adminId = Headers.GetUserId(Request.Headers);
-        var command = new ResetPasswordCommand(adminId, email, request.Password);
+        var command = new ResetPasswordCommand(email, request.Password);
         var response = await _authService.ResetPassword(command);
 
         if(response.IsSuccess)

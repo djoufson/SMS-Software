@@ -23,6 +23,7 @@ public static class DependencyInjection
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         services.AddScoped<RegisterUserIdMiddleware>();
+        services.AddScoped<VerifyExistenceMiddleware>();
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
         return services;
     }
@@ -51,6 +52,7 @@ public static class DependencyInjection
             opt.AddPolicy(Policies.AdminOnly, p => p.RequireRole(Roles.Admin));
             opt.AddPolicy(Policies.SecretaryOnly, p => p.RequireRole(Roles.Secretary));
             opt.AddPolicy(Policies.StudentOnly, p => p.RequireRole(Roles.Student));
+            opt.AddPolicy(Policies.AdminAndSecretary, p => p.RequireRole(Roles.Admin, Roles.Secretary));
         });
 
         return services;
@@ -71,6 +73,8 @@ public static class DependencyInjection
         app.UseAuthorization();
 
         app.UseMiddleware<RegisterUserIdMiddleware>();
+
+        app.UseMiddleware<VerifyExistenceMiddleware>();
 
         app.MapControllers();
 

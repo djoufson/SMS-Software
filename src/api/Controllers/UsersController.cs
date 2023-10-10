@@ -21,8 +21,7 @@ public class UsersController : ApiController
     [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
     public async Task<IActionResult> Register(RegisterUserRequest request)
     {
-        var userId = Headers.GetUserId(Request.Headers);
-        var command = new RegisterUserCommand(userId, request);
+        var command = new RegisterUserCommand(request);
         var response = await _userService.Register(command);
         if(response.IsSuccess)
             return Created("", response.Value);
@@ -34,5 +33,29 @@ public class UsersController : ApiController
             UserRegistrationError => BadRequest(error),
             _ => Problem()
         };
+    }
+
+    [HttpDelete("{email}")]
+    [Authorize(Policy = Policies.AdminOnly)]
+    [ProducesResponseType(typeof(DeleteUserResponse), StatusCodes.Status200OK)]
+    public async Task<IActionResult> DeleteUser(string email)
+    {
+        var command = new DeleteUserCommand(email);
+        var response = await _userService.DeleteUser(command);
+        if(response.IsSuccess)
+            return Ok(response.Value);
+
+        var error = response.Errors.Select(e => e.Message);
+        return Problem();
+    }
+
+    [HttpGet]
+    [Authorize(Policy = Policies.AdminAndSecretary)]
+    [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetAllUsers(bool? active)
+    {
+        var query = new GetUsersQuery(active);
+        var users = await _userService.GetAllUsers(query);
+        return Ok(users);
     }
 }
