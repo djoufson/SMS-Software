@@ -1,11 +1,21 @@
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+# Learn about building .NET container images:
+# https://github.com/dotnet/dotnet-docker/blob/main/samples/README.md
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
+WORKDIR /source
+
+# copy csproj and restore as distinct layers
 COPY *.csproj ./
 RUN dotnet restore
-COPY . .
-WORKDIR /src
+
+# # copy and publish app and libraries
+COPY . ./
+RUN dotnet publish -c Release -o /app
+
+# final stage/image
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /app
+COPY --from=build /app .
+
+EXPOSE 5000
+ENTRYPOINT ["dotnet", "api.dll"]

@@ -4,31 +4,46 @@ services:
   api:
     container_name: api
     build:
-      context: .
-      dockerfile: src/Api/Dockerfile
+      context: src/api/
+      dockerfile: Dockerfile
     depends_on:
-      - mssql
+      - postgres_db
     ports:
-      - 80
-      - 443
+      - 8000:80
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
-    volumes:
-      - ~/.aspnet/https:/https:ro
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__Postgresql=User Id=postgres;Password=postgres;Server=postgres_db;Port=5432;Database=Sms;IntegratedSecurity=true;Pooling=true;
+      # - ASPNETCORE_URLS=https://+:443;http://+:80
+      # - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      # - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    # volumes:
+    #   - ~/.aspnet/https:/https:ro
 
-  mssql:
-    container_name: mssql
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    restart: always
+  # mssql:
+  #   container_name: mssql
+  #   image: mcr.microsoft.com/mssql/server:2022-latest
+  #   restart: always
+  #   environment:
+  #     ACCEPT_EULA: "Y"
+  #     SA_PASSWORD: "Contrasena12345678"
+  #   ports:
+  #     - 1433:1433
+  #   volumes:
+  #     - mssqldata:/var/opt/mssql
+
+  postgres_db:
+    image: postgres
+    container_name: postgres_db
     environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "Contraseña12345678"
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST_AUTH_METHOD=trust
     ports:
-      - 1433:1433
+      - 5433:5433
+    restart: always
     volumes:
-      - my-volume:/var/opt/mssql
+      - postgresdata:/var/lib/postgresql/data
 volumes:
-  my-volume:
+  mssqldata:
+  postgresdata:
