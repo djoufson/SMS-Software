@@ -84,7 +84,8 @@ namespace api.Migrations
                     Motif = table.Column<string>(type: "text", nullable: false),
                     Amount = table.Column<decimal>(type: "numeric", nullable: false),
                     StudentId = table.Column<string>(type: "text", nullable: true),
-                    SecretaryId = table.Column<string>(type: "text", nullable: true)
+                    SecretaryId = table.Column<string>(type: "text", nullable: true),
+                    PaidStatus = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {

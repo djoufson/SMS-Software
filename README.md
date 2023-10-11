@@ -51,11 +51,11 @@ All you need is Docker Desktop installed on your computer and a stable internet 
 
 Inside the `SMS-Software` root directory, make sur your Docker Desktop host is running and type the following command:
 ```shell
-docker-compose up
+docker-compose up -d
 ```
 Or
 ```shell
-docker compose up
+docker compose up -d
 ```
 
 The api is then available on the url [http://localhost:8000](http://localhost:8000).

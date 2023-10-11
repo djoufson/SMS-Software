@@ -11,7 +11,7 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231010101820_Initial Create")]
+    [Migration("20231011092753_Initial Create")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -133,6 +133,9 @@ namespace api.Migrations
                     b.Property<string>("Motif")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<bool>("PaidStatus")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("SecretaryId")
                         .HasColumnType("text");

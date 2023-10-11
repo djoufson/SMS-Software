@@ -6,6 +6,6 @@ public class Headers
 
     public static string GetUserId(IHeaderDictionary headers)
     {
-        return headers.TryGetValue(Headers.UserId, out var userId) ? userId! : string.Empty;
+        return headers.TryGetValue(UserId, out var userId) ? userId! : string.Empty;
     }
 }

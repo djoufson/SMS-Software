@@ -77,10 +77,12 @@ public static class DependencyInjection
 
     public static async Task<WebApplication> PrepDatabase(this WebApplication app)
     {
+        if(app.Environment.IsDevelopment())
+            return app;
+
         var scope = app.Services.CreateAsyncScope();
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        if(!app.Environment.IsDevelopment())
-            await db.Database.MigrateAsync();
+        await db.Database.MigrateAsync();
         return app;
     }
 }

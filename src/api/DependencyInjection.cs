@@ -6,6 +6,7 @@ using api.Services.Settings;
 using api.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 namespace api;
 
 public static class DependencyInjection
@@ -21,8 +22,22 @@ public static class DependencyInjection
         services.AddControllers();
         services.AddCors();
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        services.AddSwaggerGen(c => {
+            c.SwaggerDoc("v1", new OpenApiInfo{
+                Title = "SMS_API",
+                Version = "v1"
+            });
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme(){
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                In = ParameterLocation.Header,
+                Description = "JWT Authorization header using Bearer scheme.\r\n\r\n Enter. 'Bearer' [space] and then your token in the text input below. \r\n\r\nExample: \"Bearer 1safsfdfsdfsdf"
+            });
+        });
         services.AddScoped<RegisterUserIdMiddleware>();
+        services.AddScoped<VerifyExistenceMiddleware>();
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
         return services;
     }
@@ -51,6 +66,7 @@ public static class DependencyInjection
             opt.AddPolicy(Policies.AdminOnly, p => p.RequireRole(Roles.Admin));
             opt.AddPolicy(Policies.SecretaryOnly, p => p.RequireRole(Roles.Secretary));
             opt.AddPolicy(Policies.StudentOnly, p => p.RequireRole(Roles.Student));
+            opt.AddPolicy(Policies.AdminAndSecretary, p => p.RequireRole(Roles.Admin, Roles.Secretary));
         });
 
         return services;
@@ -71,6 +87,8 @@ public static class DependencyInjection
         app.UseAuthorization();
 
         app.UseMiddleware<RegisterUserIdMiddleware>();
+
+        app.UseMiddleware<VerifyExistenceMiddleware>();
 
         app.MapControllers();
 

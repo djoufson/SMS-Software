@@ -21,7 +21,7 @@ public sealed class Secretary : User
         string image) : base(id, firstName, lastName, email, password, street, city, zipCode, province, telephone, personalId, image)
     {
     }
-    
+
     // For Entity Framework concerns
     private Secretary()
     {}
@@ -52,5 +52,12 @@ public sealed class Secretary : User
             telephone,
             personalId,
             image);
+    }
+
+    public bool SanctionStudent(Student student, Sanction sanction)
+    {
+        Sanctions.Add(sanction);
+        student.Sanctions.Add(sanction);
+        return true;
     }
 }

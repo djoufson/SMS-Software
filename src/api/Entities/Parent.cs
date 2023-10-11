@@ -5,7 +5,7 @@ namespace api.Entities;
 
 public sealed class Parent : User
 {
-    public ICollection<Student> Children { get; set; } = new List<Student>();
+    public ICollection<Student> Children { get; private set; } = new List<Student>();
     private Parent(
         string id,
         string firstName,
