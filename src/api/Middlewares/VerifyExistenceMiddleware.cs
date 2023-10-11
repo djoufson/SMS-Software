@@ -29,6 +29,9 @@ public class VerifyExistenceMiddleware : IMiddleware
             return;
         }
 
-        await context.Response.WriteAsJsonAsync(Results.Unauthorized());
+        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        await context.Response.WriteAsJsonAsync(new {
+            Message = "The user you are logged in with does not or no longer exist"
+        });
     }
 }
