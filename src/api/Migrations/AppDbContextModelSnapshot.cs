@@ -131,6 +131,9 @@ namespace api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("PaidStatus")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("SecretaryId")
                         .HasColumnType("text");
 

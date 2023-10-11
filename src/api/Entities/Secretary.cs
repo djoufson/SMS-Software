@@ -53,4 +53,11 @@ public sealed class Secretary : User
             personalId,
             image);
     }
+
+    public bool SanctionStudent(Student student, Sanction sanction)
+    {
+        Sanctions.Add(sanction);
+        student.Sanctions.Add(sanction);
+        return true;
+    }
 }
