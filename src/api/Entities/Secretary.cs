@@ -21,7 +21,7 @@ public sealed class Secretary : User
         string image) : base(id, firstName, lastName, email, password, street, city, zipCode, province, telephone, personalId, image)
     {
     }
-    
+
     // For Entity Framework concerns
     private Secretary()
     {}

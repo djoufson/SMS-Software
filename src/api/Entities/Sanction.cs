@@ -4,10 +4,11 @@ namespace api.Entities;
 
 public sealed class Sanction : Entity<string>
 {
-    public string Motif { get; set; }
-    public decimal Amount { get; set; }
-    public Student Student { get; set; }
-    public Secretary Secretary { get; set; }
+    public string Motif { get; private set; }
+    public decimal Amount { get; private set; }
+    public Student Student { get; private set; }
+    public Secretary Secretary { get; private set; }
+    public bool PaidStatus { get; private set; }
 
     private Sanction(
         string id,
@@ -37,5 +38,17 @@ public sealed class Sanction : Entity<string>
             motif,
             amount
         );
+    }
+
+    public bool Pay()
+    {
+        PaidStatus = true;
+        return true;
+    }
+
+    public bool Rollback()
+    {
+        PaidStatus = false;
+        return true;
     }
 }
