@@ -11,9 +11,9 @@ public class JwtTokenGenerator : IJwtTokenGenerator
 {
     private readonly JwtSettings _jwt;
 
-    public JwtTokenGenerator(IConfiguration configuration)
+    public JwtTokenGenerator(JwtSettings jwt)
     {
-        _jwt = configuration.GetSection(JwtSettings.SectionName).Get<JwtSettings>()!;
+        _jwt = jwt;
     }
 
     public string GenerateToken(IEnumerable<Claim> claims)
