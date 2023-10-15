@@ -2,7 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using api.Services.Abstractions;
-using api.Services.Settings;
+using api.Settings;
 using Microsoft.IdentityModel.Tokens;
 
 namespace api.Services.Concrete;

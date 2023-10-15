@@ -40,10 +40,11 @@ public static class DependencyInjection
         var scope = app.Services.CreateAsyncScope();
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         var authManager = scope.ServiceProvider.GetRequiredService<IAuthManager>();
+        var hashGenerator = scope.ServiceProvider.GetRequiredService<IHashGenerator>();
         if(await db.Users.AnyAsync())
             return app;
 
-        var user = Admin.Create("Admin", "Admin", Email.Create("admin@email.com")!, Password.CreateNewPassword("string")!, "", "", "", "", "", "", "");
+        var user = Admin.Create("Admin", "Admin", Email.Create("admin@email.com")!, Password.CreateNewPassword("string", hashGenerator)!, "", "", "", "", "", "", "");
 
         await authManager.AddToRoleAsync(user, Roles.Admin);
 

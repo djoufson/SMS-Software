@@ -16,7 +16,7 @@ public partial class AuthService
             return Result.Fail(AuthErrors.UserNotFoundError);
 
         // Update his password
-        var password = Password.CreateNewPassword(request.Password);
+        var password = Password.CreateNewPassword(request.Password, _hashGenerator);
         if(password is null)
             return Result.Fail(AuthErrors.PasswordRequirementsError);
 

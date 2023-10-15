@@ -20,7 +20,7 @@ public partial class AuthService
             return Result.Fail(AuthErrors.UserNotFoundError);
 
         // Check the password
-        var password = Password.CreateNewPassword(request.Password);
+        var password = Password.CreateNewPassword(request.Password, _hashGenerator);
         if(user.Password != password)
             return Result.Fail(AuthErrors.BadCredentialsError);
 

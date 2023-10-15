@@ -13,12 +13,12 @@ public partial class AuthService
         if(user is null)
             return Result.Fail(AuthErrors.UserNotFoundError);
 
-        var password = Password.CreateNewPassword(request.Password);
+        var password = Password.CreateNewPassword(request.Password, _hashGenerator);
         if(user.Password != password)
             return Result.Fail(AuthErrors.MismatchPasswordError);
 
         // Update his password
-        var newPassword = Password.CreateNewPassword(request.NewPassword);
+        var newPassword = Password.CreateNewPassword(request.NewPassword, _hashGenerator);
         if(newPassword is null)
             return Result.Fail(AuthErrors.PasswordRequirementsError);
         user.ChangePassword(newPassword);
