@@ -21,10 +21,16 @@ public class LoginController : ApiController
     public async Task<IActionResult> Login(LoginRequest request)
     {
         var response = await _authService.Login(request);
-        if(response.IsFailed)
-            return BadRequest(response.Errors.Select(e => e.Message));
+        if(response.IsSuccess)
+            return Ok(response.Value);
 
-        return Ok(response.Value);
+        var error = response.Errors.Select(e => e.Message);
+        return response.Errors.First() switch
+        {
+            BadCredentialsError or PasswordRequirementsError => BadRequest(error),
+            UserNotFoundError => NotFound(error),
+            _ => Problem()
+        };
     }
 
     [Authorize]

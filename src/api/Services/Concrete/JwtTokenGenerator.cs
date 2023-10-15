@@ -2,7 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using api.Services.Abstractions;
-using api.Services.Settings;
+using api.Settings;
 using Microsoft.IdentityModel.Tokens;
 
 namespace api.Services.Concrete;
@@ -11,9 +11,9 @@ public class JwtTokenGenerator : IJwtTokenGenerator
 {
     private readonly JwtSettings _jwt;
 
-    public JwtTokenGenerator(IConfiguration configuration)
+    public JwtTokenGenerator(JwtSettings jwt)
     {
-        _jwt = configuration.GetSection(JwtSettings.SectionName).Get<JwtSettings>()!;
+        _jwt = jwt;
     }
 
     public string GenerateToken(IEnumerable<Claim> claims)

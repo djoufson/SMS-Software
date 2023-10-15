@@ -1,4 +1,4 @@
-namespace api.Services.Settings;
+namespace api.Settings;
 
 public sealed class JwtSettings
 {

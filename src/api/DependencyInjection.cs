@@ -2,7 +2,7 @@ using System.Text;
 using api.Data;
 using api.Middlewares;
 using api.Services;
-using api.Services.Settings;
+using api.Settings;
 using api.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -17,7 +17,7 @@ public static class DependencyInjection
         IHostEnvironment env)
     {
         services.AddAuth(configuration);
-        services.AddServices();
+        services.AddServices(configuration);
         services.AddPersistence(configuration, env);
         services.AddControllers();
         services.AddCors();

@@ -1,4 +1,5 @@
 using api.Entities.Base;
+using api.Services.Abstractions;
 
 namespace api.Entities.ValueObjects;
 
@@ -11,10 +12,10 @@ public sealed record Password : ValueObject
         Value = hash;
     }
 
-    public static Password? CreateNewPassword(string password)
+    public static Password? CreateNewPassword(string password, IHashGenerator hashGenerator)
     {
         if (ValidatePassword(password))
-            return new(HashPassword(password));
+            return new(hashGenerator.Hash(password));
 
         return null;
     }
@@ -29,10 +30,5 @@ public sealed record Password : ValueObject
         return
             !string.IsNullOrEmpty(password); // &&
             // password.Length >= 6;
-    }
-
-    private static string HashPassword(string password)
-    {
-        return password;
     }
 }

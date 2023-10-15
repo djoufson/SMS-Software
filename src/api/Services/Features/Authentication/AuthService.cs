@@ -7,9 +7,14 @@ public partial class AuthService
 {
     private readonly AppDbContext _context;
     private readonly IJwtTokenGenerator _tokenGenerator;
-    public AuthService(AppDbContext context, IJwtTokenGenerator tokenGenerator)
+    private readonly IHashGenerator _hashGenerator;
+    public AuthService(
+        AppDbContext context,
+        IJwtTokenGenerator tokenGenerator,
+        IHashGenerator hashGenerator)
     {
         _tokenGenerator = tokenGenerator;
         _context = context;
+        _hashGenerator = hashGenerator;
     }
 }

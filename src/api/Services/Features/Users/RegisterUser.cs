@@ -1,6 +1,7 @@
 using api.Entities;
 using api.Entities.Base;
 using api.Entities.ValueObjects;
+using api.Services.Abstractions;
 using api.Services.Features.Users.Errors;
 using api.Utilities;
 using FluentResults;
@@ -19,7 +20,7 @@ public partial class UserService
             return Result.Fail(UserErrors.ConflictedEmailsError);
 
         // Create a new user based on the UserType supplied
-        var user = CreateUser(request.Request);
+        var user = CreateUser(request.Request, _hashGenerator);
 
         if(user is null)
             return Result.Fail(UserErrors.UserRegistrationError);
@@ -53,10 +54,10 @@ public partial class UserService
             user.Image);
     }
 
-    private static User? CreateUser(RegisterUserRequest req)
+    private static User? CreateUser(RegisterUserRequest req, IHashGenerator hashGenerator)
     {
         var email = Email.Create(req.Email);
-        var pwd = Password.CreateNewPassword(req.Password);
+        var pwd = Password.CreateNewPassword(req.Password, hashGenerator);
 
         if(email is null || pwd is null)
             return null;
