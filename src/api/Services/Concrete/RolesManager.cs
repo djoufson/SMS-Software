@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api.Services.Concrete;
 
-public sealed class AuthManager : IAuthManager
+public sealed class RolesManager : IRolesManager
 {
     private readonly AppDbContext _context;
 
-    public AuthManager(AppDbContext context)
+    public RolesManager(AppDbContext context)
     {
         _context = context;
     }

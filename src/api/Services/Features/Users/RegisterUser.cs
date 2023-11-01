@@ -33,7 +33,7 @@ public partial class UserService
             _ => Roles.Student
         };
 
-        await _authManager.AddToRoleAsync(user, role);
+        await _rolesManager.AddToRoleAsync(user, role);
 
         await _context.AddAsync(user);
         await _context.SaveChangesAsync();

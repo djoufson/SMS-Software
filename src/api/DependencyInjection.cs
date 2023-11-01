@@ -16,6 +16,7 @@ public static class DependencyInjection
         IConfiguration configuration,
         IHostEnvironment env)
     {
+        services.AddMemoryCache();
         services.AddAuth(configuration);
         services.AddServices(configuration);
         services.AddPersistence(configuration, env);

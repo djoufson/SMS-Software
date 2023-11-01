@@ -63,10 +63,13 @@ public class UserTests
 
         Role secretaryRole = Role.CreateNewRole(Roles.Secretary);
         Role adminRole = Role.CreateNewRole(Roles.Admin);
+
+        // Act
         bool firstAssignment = user.AssignRole(secretaryRole);
         bool secondAssignment = user.AssignRole(secretaryRole);
         bool thirdAssignment = user.AssignRole(adminRole);
 
+        // Assert
         Assert.True(firstAssignment);
         Assert.False(secondAssignment);
         Assert.True(thirdAssignment);
