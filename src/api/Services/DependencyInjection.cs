@@ -15,7 +15,7 @@ public static class DependencyInjection
         services.AddSingleton<IHashGenerator, HashGenerator>();
         services.AddSingleton(cfg.GetRequiredSection(HashSettings.SectionName).Get<HashSettings>()!);
         services.AddSingleton(cfg.GetRequiredSection(JwtSettings.SectionName).Get<JwtSettings>()!);
-        services.AddScoped<IAuthManager, AuthManager>();
+        services.AddScoped<IRolesManager, RolesManager>();
         services.AddScoped<AuthService>();
         services.AddScoped<UserService>();
         services.AddScoped<SanctionService>();

@@ -3,6 +3,10 @@ using api.Utilities;
 
 namespace api.Middlewares;
 
+/// <summary>
+/// In order to use the authenticated user ID in the pipeline, this middleware will retrieve it from the Token / ClaimsPrincipal,
+/// and register it as a Request Header.
+/// </summary>
 public class RegisterUserIdMiddleware : IMiddleware
 {
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)

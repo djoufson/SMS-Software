@@ -5,6 +5,11 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace api.Middlewares;
 
+/// <summary>
+/// This middleware is used to validate the authenticated user existence.
+/// Since the user is authenticated with his ID through a JWT token, we must ensure that the user is in the database,
+/// in case he has been deleted or revoked.
+/// </summary> 
 public class VerifyExistenceMiddleware : IMiddleware
 {
     private readonly AppDbContext _context;
