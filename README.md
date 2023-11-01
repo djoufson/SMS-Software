@@ -43,11 +43,11 @@ The api is then available on the url [http://localhost:5078](http://localhost:50
 Also we have Swagger support at url [http://localhost:5078/swagger/](http://localhost:5078/swagger/). 
 ### Docker Environment Setup
 You can also run the application in production mode inside a Docker environment.
-All you need is Docker Desktop installed on your computer and a stable internet connexion.
+All you need is Docker Desktop installed on your computer and a stable internet connection.
 
-> Note: The internet connexion consummation will be heavy only for the first run,
+> Note: The internet connection consummation will be heavy only for the first run,
 > because of the large amount of Docker Images that will be downloaded. Once downloaded,
-> you will no longer need any Internet connexion or additional storage requirement to run the project
+> you will no longer need any Internet connection or additional storage requirement to run the project
 
 Inside the `SMS-Software` root directory, make sur your Docker Desktop host is running and type the following command:
 ```shell
