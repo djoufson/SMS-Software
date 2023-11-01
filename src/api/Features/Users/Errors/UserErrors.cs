@@ -1,4 +1,4 @@
-namespace api.Services.Features.Users.Errors;
+namespace api.Features.Users.Errors;
 
 public sealed class UserErrors
 {

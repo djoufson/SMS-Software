@@ -1,8 +1,8 @@
+using api.Features.Authentication;
+using api.Features.Sanctions;
+using api.Features.Users;
 using api.Services.Abstractions;
 using api.Services.Concrete;
-using api.Services.Features.Authentication;
-using api.Services.Features.Sanctions;
-using api.Services.Features.Users;
 using api.Settings;
 
 namespace api.Services;

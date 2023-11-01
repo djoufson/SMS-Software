@@ -1,6 +1,6 @@
 using api.Data;
 
-namespace api.Services.Features.Sanctions;
+namespace api.Features.Sanctions;
 
 public partial class SanctionService
 {

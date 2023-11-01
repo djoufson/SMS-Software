@@ -1,8 +1,8 @@
 using api.Entities.ValueObjects;
-using api.Services.Features.Authentication.Errors;
+using api.Features.Authentication.Errors;
 using FluentResults;
 
-namespace api.Services.Features.Authentication;
+namespace api.Features.Authentication;
 
 public partial class AuthService
 {

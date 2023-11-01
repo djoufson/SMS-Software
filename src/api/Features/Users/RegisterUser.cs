@@ -1,13 +1,13 @@
 using api.Entities;
 using api.Entities.Base;
 using api.Entities.ValueObjects;
+using api.Features.Users.Errors;
 using api.Services.Abstractions;
-using api.Services.Features.Users.Errors;
 using api.Utilities;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace api.Services.Features.Users;
+namespace api.Features.Users;
 
 public partial class UserService
 {

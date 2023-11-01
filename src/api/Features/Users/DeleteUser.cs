@@ -2,7 +2,7 @@ using api.Entities.ValueObjects;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace api.Services.Features.Users;
+namespace api.Features.Users;
 
 public partial class UserService
 {

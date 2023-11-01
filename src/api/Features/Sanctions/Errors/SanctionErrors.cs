@@ -1,4 +1,4 @@
-namespace api.Services.Features.Sanctions.Errors;
+namespace api.Features.Sanctions.Errors;
 
 public class SanctionErrors
 {

@@ -1,7 +1,7 @@
 using api.Data;
 using api.Services.Abstractions;
 
-namespace api.Services.Features.Users;
+namespace api.Features.Users;
 
 public partial class UserService
 {

@@ -1,6 +1,6 @@
 using FluentResults;
 
-namespace api.Services.Features.Authentication.Errors;
+namespace api.Features.Authentication.Errors;
 
 public sealed class BadCredentialsError : IError
 {

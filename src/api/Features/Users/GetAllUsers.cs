@@ -1,7 +1,7 @@
 using api.Entities.Base;
 using Microsoft.EntityFrameworkCore;
 
-namespace api.Services.Features.Users;
+namespace api.Features.Users;
 
 public partial class UserService
 {

@@ -1,11 +1,11 @@
 using api.Entities;
 using api.Entities.ValueObjects;
-using api.Services.Features.Authentication.Errors;
-using api.Services.Features.Sanctions.Errors;
+using api.Features.Authentication.Errors;
+using api.Features.Sanctions.Errors;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace api.Services.Features.Sanctions;
+namespace api.Features.Sanctions;
 
 public partial class SanctionService
 {

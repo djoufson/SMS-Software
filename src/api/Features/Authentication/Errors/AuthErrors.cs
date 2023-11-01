@@ -1,4 +1,4 @@
-namespace api.Services.Features.Authentication.Errors;
+namespace api.Features.Authentication.Errors;
 
 public class AuthErrors
 {
