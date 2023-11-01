@@ -1,4 +1,4 @@
-namespace api.Services.Abstractions;
+namespace api.Services.Interfaces;
 
 /// <summary>
 /// A service that generates hashes based on a string input

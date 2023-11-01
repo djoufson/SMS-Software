@@ -1,6 +1,6 @@
 using System.Security.Claims;
 
-namespace api.Services.Abstractions;
+namespace api.Services.Interfaces;
 
 /// <summary>
 /// A service used to generate JWT Bearer Tokens

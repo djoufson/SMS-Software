@@ -1,5 +1,5 @@
 using api.Data;
-using api.Services.Abstractions;
+using api.Services.Interfaces;
 
 namespace api.Features.Users;
 

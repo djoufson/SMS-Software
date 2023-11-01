@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
-using api.Services.Abstractions;
+using api.Services.Interfaces;
 using api.Settings;
 
 namespace api.Services.Concrete;

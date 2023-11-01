@@ -2,7 +2,7 @@ using api.Entities;
 using api.Entities.Base;
 using api.Entities.ValueObjects;
 using api.Features.Users.Errors;
-using api.Services.Abstractions;
+using api.Services.Interfaces;
 using api.Utilities;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;

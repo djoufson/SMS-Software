@@ -1,6 +1,6 @@
 using api.Entities.Base;
 
-namespace api.Services.Abstractions;
+namespace api.Services.Interfaces;
 
 /// <summary>
 /// This service enables to manage the Roles of a user

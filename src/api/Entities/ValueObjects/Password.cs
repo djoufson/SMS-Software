@@ -1,5 +1,5 @@
 using api.Entities.Base;
-using api.Services.Abstractions;
+using api.Services.Interfaces;
 
 namespace api.Entities.ValueObjects;
 
