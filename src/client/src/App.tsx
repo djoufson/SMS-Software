@@ -3,10 +3,15 @@ import reactLogo from "./assets/react.svg";
 import "./App.css";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
-import Router, { BrowserRouter, Route, Routes } from "react-router-dom";
+import Router, {
+  BrowserRouter,
+  Route,
+  Routes,
+} from "react-router-dom";
 import Home from "./pages/home";
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
