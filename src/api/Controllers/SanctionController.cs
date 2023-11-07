@@ -1,7 +1,7 @@
 using api.Controllers.Base;
-using api.Services.Features.Authentication.Errors;
-using api.Services.Features.Sanctions;
-using api.Services.Features.Sanctions.Errors;
+using api.Features.Authentication.Errors;
+using api.Features.Sanctions;
+using api.Features.Sanctions.Errors;
 using api.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
