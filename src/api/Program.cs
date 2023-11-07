@@ -1,6 +1,6 @@
 using api;
 using api.Data;
-
+using api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +22,8 @@ await app.PrepDatabase();
 await app.SeedRolesAsync();
 
 await app.SeedDataAsync();
+
+app.UseMiddleware<CorsMiddleware>();
 
 app.ConfigurePipeline();
 

@@ -21,14 +21,16 @@ public static class DependencyInjection
         services.AddServices(configuration);
         services.AddPersistence(configuration, env);
         services.AddControllers();
-        services.AddCors();
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen(c => {
-            c.SwaggerDoc("v1", new OpenApiInfo{
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo
+            {
                 Title = "SMS_API",
                 Version = "v1"
             });
-            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme(){
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+            {
                 Name = "Authorization",
                 Type = SecuritySchemeType.ApiKey,
                 Scheme = "Bearer",
@@ -39,6 +41,7 @@ public static class DependencyInjection
         });
         services.AddScoped<RegisterUserIdMiddleware>();
         services.AddScoped<VerifyExistenceMiddleware>();
+        services.AddScoped<CorsMiddleware>();
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
         return services;
     }
@@ -78,12 +81,16 @@ public static class DependencyInjection
         app.UseSwagger();
         app.UseSwaggerUI();
 
-        app.UseCors(cfg =>
-        {
-            cfg.AllowAnyOrigin();
-        });
 
-        // app.UseHttpsRedirection();
+        // app.UseCors(policy =>
+        // {
+        //     policy
+        //         .AllowAnyOrigin()
+        //         .AllowAnyMethod()
+        //         .AllowAnyHeader();
+        // });
+
+        app.UseHttpsRedirection();     
 
         app.UseAuthorization();
 
