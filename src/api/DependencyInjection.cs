@@ -16,6 +16,7 @@ public static class DependencyInjection
         IConfiguration configuration,
         IHostEnvironment env)
     {
+        services.AddCors();
         services.AddMemoryCache();
         services.AddAuth(configuration);
         services.AddServices(configuration);
@@ -41,7 +42,6 @@ public static class DependencyInjection
         });
         services.AddScoped<RegisterUserIdMiddleware>();
         services.AddScoped<VerifyExistenceMiddleware>();
-        services.AddScoped<CorsMiddleware>();
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
         return services;
     }
@@ -81,16 +81,13 @@ public static class DependencyInjection
         app.UseSwagger();
         app.UseSwaggerUI();
 
-
-        // app.UseCors(policy =>
-        // {
-        //     policy
-        //         .AllowAnyOrigin()
-        //         .AllowAnyMethod()
-        //         .AllowAnyHeader();
-        // });
-
-        app.UseHttpsRedirection();     
+        app.UseCors(policy =>
+        {
+            policy
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });   
 
         app.UseAuthorization();
 
