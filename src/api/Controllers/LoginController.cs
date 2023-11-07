@@ -24,6 +24,8 @@ public class LoginController : ApiController
         if(response.IsSuccess)
             return Ok(response.Value);
 
+        Console.WriteLine(HttpContext.Response.Headers["Access-Control-Allow-Origin"]);
+
         var error = response.Errors.Select(e => e.Message);
         return response.Errors.First() switch
         {
