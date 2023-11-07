@@ -11,7 +11,7 @@ function Login() {
     e.preventDefault();
     console.log(user);
     axios
-      .post(" http://localhost:5078/api/login/authenticate", user)
+      .post("http://localhost:5078/api/Login/authenticate", user)
       .then((res) => {
         console.log(res.data);
         setToken(res.data.token);
@@ -19,10 +19,7 @@ function Login() {
       .catch((err) => [console.log(err)]);
   };
 
-  const openRegister = (e: any) => {
-    e.preventDefault();
-    navigate("/signup");
-  };
+ 
 
   const login = (e: any) => {
     e.preventDefault();
@@ -99,25 +96,14 @@ function Login() {
             </div>
 
             <div>
-              <button
+              <input
                 type="submit"
-                onClick={handleSubmit}
+                value="Se Connecter"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Se connecter
-              </button>
+              />
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Pas encore inscrit?
-            <a
-              onClick={openRegister}
-              className="ml-2 font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              Inscrivez-vous
-            </a>
-          </p>
         </div>
       </div>
     </div>
