@@ -1,7 +1,7 @@
 using api.Data;
 using api.Entities;
 using api.Entities.Base;
-using api.Services.Abstractions;
+using api.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Services.Concrete;

@@ -1,6 +1,6 @@
 using api.Controllers.Base;
-using api.Services.Features.Users;
-using api.Services.Features.Users.Errors;
+using api.Features.Users;
+using api.Features.Users.Errors;
 using api.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

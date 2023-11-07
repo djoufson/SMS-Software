@@ -2,8 +2,8 @@ using api.Controllers.Base;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using api.Utilities;
-using api.Services.Features.Authentication;
-using api.Services.Features.Authentication.Errors;
+using api.Features.Authentication.Errors;
+using api.Features.Authentication;
 
 namespace api.Controllers;
 
