@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Sidebar } from "flowbite-react";
 import SidebarP from "../components/sidebar";
 import FooterP from "../components/footer";
+import Api from "../libs/api";
 
 const schema = yup
   .object()
@@ -44,7 +45,7 @@ const schema = yup
   })
   .required();
 
-const SignUp = () => {
+const Register = () => {
   const ROLES = [
     { type: "admin", label: "Administrateur" },
     { type: "secrétaire", label: "Secrétaire" },
@@ -64,8 +65,8 @@ const SignUp = () => {
 
   const onSubmitHandler = (data: any) => {
     console.log(data);
-    axios
-      .post("http://localhost:5078/api/Register/register", {
+    Api
+      .post("Register/register", {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
@@ -318,4 +319,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Register;

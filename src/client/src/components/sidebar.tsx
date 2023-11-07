@@ -28,7 +28,7 @@ function SidebarP() {
   ];
 
   return (
-    <aside className="flex flex-col">
+    <aside className="flex flex-col z-10">
       <div
         className={`${
           open ? "w-72" : "w-20"
