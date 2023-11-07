@@ -6,10 +6,10 @@ import FooterP from "./footer";
 function Layout() {
   return (
     <div>
-      <div>
+      <div className="z-10">
         <SidebarP />
       </div>
-      <div>{<Outlet />}</div>
+      <div className="z-0">{<Outlet />}</div>
     </div>
   );
 }

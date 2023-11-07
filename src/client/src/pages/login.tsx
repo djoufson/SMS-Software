@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import Api from "../libs/api";
 
 function Login() {
   const [user, setUser] = useState({ email: "", password: "" });
@@ -10,19 +10,12 @@ function Login() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     console.log(user);
-    axios
-      .post("http://localhost:9000/api/login/authenticate", user)
+    Api.post("Login/authenticate", user)
       .then((res) => {
         console.log(res.data);
         setToken(res.data.token);
       })
       .catch((err) => [console.log(err)]);
-  };
-
- 
-
-  const login = (e: any) => {
-    e.preventDefault();
     if (!token) {
     } else {
       navigate("/home", { state: token });
@@ -103,7 +96,6 @@ function Login() {
               />
             </div>
           </form>
-
         </div>
       </div>
     </div>
