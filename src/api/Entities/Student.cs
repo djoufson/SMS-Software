@@ -20,7 +20,7 @@ public sealed class Student : User
         string province,
         string telephone,
         string personalId,
-        string image) : base(id, firstName, lastName, email, password, street, city, zipCode, province, telephone, personalId, image)
+        string? image) : base(id, firstName, lastName, email, password, street, city, zipCode, province, telephone, personalId, image)
     {
         Parent = parent;
     }
@@ -41,7 +41,7 @@ public sealed class Student : User
         string province,
         string telephone,
         string personalId,
-        string image)
+        string? image)
     {
         return new Student(
             Guid.NewGuid().ToString(),
