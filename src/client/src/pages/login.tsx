@@ -4,8 +4,11 @@ import Api from "../libs/api";
 
 function Login() {
   const [user, setUser] = useState({ email: "", password: "" });
-  const [token, setToken] = useState("");
   const navigate = useNavigate();
+  const token = "";
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -13,13 +16,10 @@ function Login() {
     Api.post("Login/authenticate", user)
       .then((res) => {
         console.log(res.data);
-        setToken(res.data.token);
+        localStorage.setItem("token", res.data.token);
+        navigate("/home");
       })
       .catch((err) => [console.log(err)]);
-    if (!token) {
-    } else {
-      navigate("/home", { state: token });
-    }
   };
 
   return (

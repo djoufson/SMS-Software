@@ -20,6 +20,16 @@ function SidebarP() {
       link: "/home/register",
     },
     {
+      title: "Toutes les sanctions",
+      src: "./src/assets/sanction",
+      link: "/home/sanctions",
+    },
+    {
+      title: "Tous les paiements",
+      src: "./src/assets/bank",
+      link: "/home/paiements",
+    },
+    {
       title: "Se déconnecter",
       src: "./src/assets/turn-off",
       link: "/logout",
@@ -64,7 +74,7 @@ function SidebarP() {
 
         <ul className="pt-6">
           {Menus.map((menu) => (
-            <Link to={menu.link}>
+            <Link to={menu.link} title={`${menu.title}`}>
               <li
                 key={menu.link}
                 className={`text-gray-200 flex items-center gap-x-4 cursor-pointer p-2  hover:bg-light-white active:bg-light-white ${

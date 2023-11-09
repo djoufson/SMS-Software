@@ -31,6 +31,7 @@ const schema = yup
       .string()
       .required("Votre numéro de téléphone est invalide")
       .min(9, "Votre numéro de téléphone est invalide"),
+    personal_id: yup.string(),
     password: yup
       .string()
       .required("Ce champs est requis")
@@ -45,12 +46,16 @@ const schema = yup
   })
   .required();
 
+const token = localStorage.getItem("token");
+const config = {
+  headers: { Authorization: `Bearer ${token}` },
+};
 const Register = () => {
   const ROLES = [
-    { type: "admin", label: "Administrateur" },
-    { type: "secrétaire", label: "Secrétaire" },
-    { type: "étudiant", label: "Etudiant" },
-    { type: "Super Admin", label: "Super Administrateur" },
+    { type: 0, label: "Administrateur" },
+    { type: 1, label: "Secrétaire" },
+    { type: 2, label: "Parent" },
+    { type: 3, label: "Etudiant" },
   ];
   const navigate = useNavigate();
   const {
@@ -65,21 +70,25 @@ const Register = () => {
 
   const onSubmitHandler = (data: any) => {
     console.log(data);
-    Api
-      .post("Register/register", {
+    Api.post(
+      "Users/register",
+      {
+        usertype: parseInt(data.role),
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
         password: data.password,
         street: data.street,
-        city: data,
-        zipCode: data.zipCode,
+        city: data.city,
+        zipCode: data.phoneIndex,
         province: data.province,
-        phoneIndex: data.phoneIndex,
-        telefon: data.telefon,
-      })
+        telephone: data.telefon,
+        personalId: data.personal_id,
+      },
+      config
+    )
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         reset();
         navigate("/users");
       })
@@ -203,6 +212,19 @@ const Register = () => {
                     />
                     <p className=" text-red-500 text-xs block sm:inline">
                       {errors.cpassword?.message}
+                    </p>
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      autoComplete="current-text"
+                      placeholder="N° de pièce d'identité"
+                      {...register("personal_id")}
+                      title="Entrez le numéro de pièce d'identité"
+                      className="pl-2 block text-left w-full rounded-lg border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                    <p className="text-red-500  text-xs block sm:inline">
+                      {errors.personal_id?.message}
                     </p>
                   </div>
                 </div>

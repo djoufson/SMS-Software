@@ -3,24 +3,25 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Loader from "./loader";
 import RecentUser from "./RecentUser";
+import Api from "../libs/api";
 
 function Users() {
   const location = useLocation();
-  const token = location.state;
+  const token = localStorage.getItem("token");
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(true);
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
   useEffect(() => {
-    const config = { headers: { Authorization: `Bearer ${token}` } };
     const fetchUser = async () => {
       setLoading(true);
       try {
-        const { data: response } = await axios.get(
-          "https://localhost:5078/api/Users",
-          config
-        );
+        const { data: response } = await Api.get("Users", config);
         setUsers(response);
+        console.log(response);
       } catch (error: any) {
         console.error(error);
       }
@@ -47,35 +48,38 @@ function Users() {
             <div className="mt-3">
               <table className="gap-3 table-auto w-full border-gray-600">
                 <thead>
-                  <tr className="table-header-group bg-gray-50 text-left dark:bg-meta-4">
-                    <th className="min-w-[120] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
+                  <tr className="bg-gray-50 text-left dark:bg-meta-4">
+                    <th className="min-w-[120] py-4 px-4 font-medium text-black text-sm dark:text-white xl:pl-11">
                       Noms
                     </th>
-                    <th className="min-w-[120] py-4 px-4 font-medium text-black dark:text-white">
+                    <th className="min-w-[120] py-4 px-4 font-medium text-black text-sm dark:text-white">
                       Prénoms
                     </th>
-                    <th className="min-w-[120] py-4 px-4 font-medium text-black dark:text-white">
+                    <th className="min-w-[120] py-4 px-4 font-medium text-black text-sm dark:text-white">
                       Email
                     </th>
-                    <th className="min-w-[120] py-4 px-4 font-medium text-black dark:text-white">
+                    <th className="min-w-[120] py-4 px-4 font-medium text-black text-sm dark:text-white">
                       Région
                     </th>
-                    <th className="min-w-[120] py-4 px-4 font-medium text-black dark:text-white">
+                    <th className="min-w-[120] py-4 px-4 font-medium text-black text-sm dark:text-white">
                       Ville
                     </th>
-                    <th className="min-w-[120] py-4 px-4 font-medium text-black dark:text-white">
+                    <th className="min-w-[120] py-4 px-4 font-medium text-black text-sm dark:text-white">
                       Quartier
                     </th>
-                    <th className="min-w-[120] py-4 px-4 font-medium text-black dark:text-white">
+                    <th className="min-w-[120] py-4 px-4 font-medium text-black text-sm dark:text-white">
                       Numéros de téléphone
                     </th>
-                    <th className="min-w-[120] py-4 px-4 font-medium text-black dark:text-white">
+                    <th className="min-w-[120] py-4 px-4 font-medium text-black text-sm dark:text-white">
+                      Numéro de pièce d'identité
+                    </th>
+                    <th className="min-w-[120] py-4 px-4 font-medium text-black text-sm dark:text-white">
                       Rôle
                     </th>
-                    <th className="min-w-[120] py-4 px-4 font-medium text-black dark:text-white">
+                    <th className="min-w-[120] py-4 px-4 font-medium text-black text-sm dark:text-white">
                       Sanctions
                     </th>
-                    <th className="min-w-[120] py-4 px-4 font-medium text-black dark:text-white">
+                    <th className="min-w-[120] py-4 px-4 font-medium text-black text-sm dark:text-white">
                       Actions
                     </th>
                   </tr>
@@ -84,40 +88,45 @@ function Users() {
                   {users.length > 0 &&
                     users.map((user: any, index) => (
                       <tr key={index}>
-                        <td className="border-b text-black border-[#eee] py-5 px-4 pl-p dark:border-strokedark xl:pl-11">
-                          {user.firstName + "a"}
+                        <td className="border-b text-black border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
+                          {user.firstName}
                         </td>
-                        <td className="border-b border-[#eee] py-5 px-4 pl-p dark:border-strokedark xl:pl-11">
-                          {user.lastName}a
+                        <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
+                          {user.lastName}
                         </td>
-                        <td className="border-b border-[#eee] py-5 px-4 pl-p dark:border-strokedark xl:pl-11">
-                          {user.email}a
+                        <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
+                          {user.email}
                         </td>
-                        <td className="border-b border-[#eee] py-5 px-4 pl-p dark:border-strokedark xl:pl-11">
-                          {user.province}a
+                        <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
+                          {user.province}
                         </td>
-                        <td className="border-b border-[#eee] py-5 px-4 pl-p dark:border-strokedark xl:pl-11">
-                          {user.city}a
+                        <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
+                          {user.city}
                         </td>
-                        <td className="border-b border-[#eee] py-5 px-4 pl-p dark:border-strokedark xl:pl-11">
-                          {user.street}a
+                        <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
+                          {user.street}
                         </td>
-                        <td className="border-b border-[#eee] py-5 px-4 pl-p dark:border-strokedark xl:pl-11">
-                          {"+" + user.phoneIndex + user.telefon}a
+                        <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
+                          {"+" + user.zipCode + user.telephone}
                         </td>
-                        <td className="border-b border-[#eee] py-5 px-4 pl-p dark:border-strokedark xl:pl-11">
-                          {user.roles}a
+                        <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
+                          {user.personalId}
                         </td>
-                        <td className="border-b border-[#eee] py-5 px-4 pl-p dark:border-strokedark xl:pl-11">
-                          {}va
+                        <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
+                          {user.roles}
                         </td>
-                        <td className="border-b border-[#eee] py-5 px-4 pl-p dark:border-strokedark xl:pl-11">
-                          <button className="bg-indigo-600 rounded text-white justify-center hover:bg-indigo-500">
-                            Modifier
-                          </button>
-                          <button className="bg-red-600 rounded text-white justify-center hover:bg-red-500">
-                            Supprimer
-                          </button>
+                        <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
+                          {}
+                        </td>
+                        <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
+                          <div className="flex-col justify-center">
+                            <button className="flex bg-indigo-600 text-sm p-3 rounded text-white justify-center hover:bg-indigo-500">
+                              Modifier
+                            </button>
+                            <button className="flex mt-2 bg-red-600 p-3 text-sm rounded text-white justify-center hover:bg-red-500">
+                              Supprimer
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
