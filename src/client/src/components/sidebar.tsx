@@ -1,37 +1,38 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import imgProj from "../assets/img/imgProj";
 
 function SidebarP() {
   const [open, setOpen] = useState(true);
   const Menus = [
     {
       title: "Dashboard",
-      src: "./src/assets/dashboard",
+      src: imgProj.dashboard,
       link: "/home",
     },
     {
       title: "Tous les utilisateurs",
-      src: "./src/assets/group",
+      src: imgProj.group,
       link: "/home/users",
     },
     {
       title: "Nouvel utilisateur",
-      src: "./src/assets/new-account",
+      src: imgProj.newAccount,
       link: "/home/register",
     },
     {
       title: "Toutes les sanctions",
-      src: "./src/assets/sanction",
+      src: imgProj.sanction,
       link: "/home/sanctions",
     },
     {
       title: "Tous les paiements",
-      src: "./src/assets/bank",
+      src: imgProj.bank,
       link: "/home/paiements",
     },
     {
       title: "Se déconnecter",
-      src: "./src/assets/turn-off",
+      src: imgProj.turnOff,
       link: "/logout",
       gap: true,
     },
