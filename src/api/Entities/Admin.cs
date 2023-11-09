@@ -18,7 +18,7 @@ public class Admin : User
         string province,
         string telephone,
         string personalId,
-        string image) : base(id, firstName, lastName, email, password, street, city, zipCode, province, telephone, personalId, image)
+        string? image) : base(id, firstName, lastName, email, password, street, city, zipCode, province, telephone, personalId, image)
     {
     }
 
@@ -37,7 +37,7 @@ public class Admin : User
         string province,
         string telephone,
         string personalId,
-        string image)
+        string? image)
     {
         return new Admin(
             Guid.NewGuid().ToString(),
