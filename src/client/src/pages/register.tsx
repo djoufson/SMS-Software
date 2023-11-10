@@ -73,9 +73,9 @@ const Register = () => {
     Api.post(
       "Users/register",
       {
-        usertype: parseInt(data.role),
-        firstName: data.firstName,
-        lastName: data.lastName,
+        UserType: parseInt(data.role),
+        lastName: data.firstName,
+        firstName: data.lastName,
         email: data.email,
         password: data.password,
         street: data.street,
@@ -90,7 +90,7 @@ const Register = () => {
       .then((res) => {
         console.log(res);
         reset();
-        navigate("/users");
+        navigate("/home/users");
       })
       .catch((err) => [console.log(err)]);
   };
@@ -129,9 +129,9 @@ const Register = () => {
   // };
 
   return (
-    <div className="flex flex-col overflow-auto">
-      <section className="container mt-10">
-        <div className="rounded shadow-lg my-auto md:mx-auto p-4 flex min-h-full flex-col lg:px-8">
+    
+      <section className="container ">
+        <div className="rounded shadow-lg my-auto md:mx-auto p-4 pb-5 flex min-h-full flex-col lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <h1 className="mx-auto h-10 w-auto texl-3xl font-bold">
               Enregistrez un nouvel utilisateur
@@ -337,7 +337,7 @@ const Register = () => {
           </div>
         </div>
       </section>
-    </div>
+    
   );
 };
 

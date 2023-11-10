@@ -7,6 +7,8 @@ import newAccount from "../new-account.png";
 import sanction from "../sanction.png";
 import school from "../school.png";
 import turnOff from "../turn-off.png";
+import edit from "../edit.png";
+import trash from "../trash.png";
 
 export default {
   bank,
@@ -17,4 +19,6 @@ export default {
   sanction,
   school,
   turnOff,
+  edit,
+  trash,
 };

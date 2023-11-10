@@ -9,7 +9,7 @@ const get = (url: any, config: any) => {
   return axios.get(apiUrl(url), config);
 };
 
-const post = (url: any, data: any, config: any) => {
+const post = (url: any, data: any, config?: any) => {
   return axios.post(apiUrl(url), data, config);
 };
 

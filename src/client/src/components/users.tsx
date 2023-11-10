@@ -4,6 +4,8 @@ import { useLocation } from "react-router-dom";
 import Loader from "./loader";
 import RecentUser from "./RecentUser";
 import Api from "../libs/api";
+import imgProj from "../assets/img/imgProj";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Users() {
   const location = useLocation();
@@ -14,6 +16,13 @@ function Users() {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
+
+  const ROLES = [
+    { type: 0, label: "Administrateur" },
+    { type: 1, label: "Secrétaire" },
+    { type: 2, label: "Parent" },
+    { type: 3, label: "Etudiant" },
+  ];
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -74,9 +83,6 @@ function Users() {
                       Numéro de pièce d'identité
                     </th>
                     <th className="min-w-[120] py-4 px-4 font-medium text-black text-sm dark:text-white">
-                      Rôle
-                    </th>
-                    <th className="min-w-[120] py-4 px-4 font-medium text-black text-sm dark:text-white">
                       Sanctions
                     </th>
                     <th className="min-w-[120] py-4 px-4 font-medium text-black text-sm dark:text-white">
@@ -107,25 +113,35 @@ function Users() {
                           {user.street}
                         </td>
                         <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
-                          {"+" + user.zipCode + user.telephone}
+                          {"+" + user.zipCode + " " + user.telephone}
                         </td>
                         <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
                           {user.personalId}
                         </td>
                         <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
-                          {user.roles}
-                        </td>
-                        <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
                           {}
                         </td>
                         <td className="border-b border-[#eee] py-5 px-4 pl-p text-sm dark:border-strokedark xl:pl-11">
-                          <div className="flex-col justify-center">
-                            <button className="flex bg-indigo-600 text-sm p-3 rounded text-white justify-center hover:bg-indigo-500">
-                              Modifier
-                            </button>
-                            <button className="flex mt-2 bg-red-600 p-3 text-sm rounded text-white justify-center hover:bg-red-500">
-                              Supprimer
-                            </button>
+                          <div className="flex-row justify-center">
+                            <div
+                              title="Modifier cet étudiant"
+                              className="flex bg-indigo-600 text-sm p-3 rounded-full text-white justify-center hover:bg-indigo-500"
+                            >
+                              <FontAwesomeIcon
+                                icon="pen-to-square"
+                                size="lg"
+                                style={{ color: "#ffffff" }}
+                              />
+                            </div>
+                            <div
+                              title="Supprimer cet étudiant"
+                              className="flex mt-2 bg-red-600 p-3 text-sm rounded-full text-white justify-center hover:bg-red-500"
+                            >
+                              <FontAwesomeIcon
+                                icon="trash-can"
+                                style={{ color: "#ffffff" }}
+                              />
+                            </div>
                           </div>
                         </td>
                       </tr>

@@ -1,22 +1,41 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Api from "../libs/api";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email("email invalide")
+    .required("Le mail est nécessaire !")
+    .matches(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/, {
+      message: "email invalide",
+    }),
+  password: yup.string().required("Ce champs est requis"),
+});
 
 function Login() {
-  const [user, setUser] = useState({ email: "", password: "" });
   const navigate = useNavigate();
-  const token = "";
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log(user);
-    Api.post("Login/authenticate", user)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    mode: "onChange",
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmitHandler = (data: any) => {
+    console.log(data);
+    Api.post("Login/authenticate", data)
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("token", res.data.token);
+        reset();
         navigate("/home");
       })
       .catch((err) => [console.log(err)]);
@@ -32,7 +51,7 @@ function Login() {
           Connectez vous
         </h2>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6" onSubmit={handleSubmit(onSubmitHandler)}>
             <div>
               <label
                 htmlFor="email"
@@ -44,13 +63,10 @@ function Login() {
               <div className="mt-2">
                 <input
                   id="email"
-                  name="email"
                   type="email"
                   autoComplete="email"
                   required
-                  onChange={(e: any) =>
-                    setUser({ ...user, email: e.target.value })
-                  }
+                  {...register("email")}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -68,13 +84,10 @@ function Login() {
               <div className="mt-2">
                 <input
                   id="password"
-                  name="password"
                   type="password"
                   autoComplete="current-password"
                   required
-                  onChange={(e: any) =>
-                    setUser({ ...user, password: e.target.value })
-                  }
+                  {...register("password")}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -92,7 +105,7 @@ function Login() {
               <input
                 type="submit"
                 value="Se Connecter"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-100  duration-300 mt-5 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               />
             </div>
           </form>
