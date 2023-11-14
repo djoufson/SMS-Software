@@ -15,7 +15,7 @@ public abstract class User : Entity<string>
     public string Telephone { get; private set; }
     public bool Inactive { get; private set; } 
     public string PersonalId { get; private set; }
-    public string Image { get; private set; }
+    public string? Image { get; private set; }
     public ICollection<Role> Roles { get; protected set; } = new List<Role>();
 
     protected User(
@@ -30,7 +30,7 @@ public abstract class User : Entity<string>
         string province,
         string telephone,
         string personalId,
-        string image) : base(id)
+        string? image) : base(id)
     {
         FirstName = firstName;
         LastName = lastName;

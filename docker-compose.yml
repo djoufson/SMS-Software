@@ -9,7 +9,7 @@ services:
     depends_on:
       - postgres_db
     ports:
-      - 8000:80
+      - 9000:80
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:80
@@ -25,18 +25,6 @@ services:
     # volumes:
     #   - ~/.aspnet/https:/https:ro
 
-  # mssql:
-  #   container_name: mssql
-  #   image: mcr.microsoft.com/mssql/server:2022-latest
-  #   restart: always
-  #   environment:
-  #     ACCEPT_EULA: "Y"
-  #     SA_PASSWORD: "Contrasena12345678"
-  #   ports:
-  #     - 1433:1433
-  #   volumes:
-  #     - mssqldata:/var/opt/mssql
-
   postgres_db:
     image: postgres
     container_name: postgres_db
@@ -49,6 +37,20 @@ services:
     restart: always
     volumes:
       - postgresdata:/var/lib/postgresql/data
+
+  client:
+    container_name: sms_client
+    build:
+      context: src/client/
+      dockerfile: Dockerfile
+    depends_on:
+      - api
+      - postgres_db
+    ports:
+      - 3000:8000
+    environment:
+      - REACT_APP_API_URL=http://api:80
+
 volumes:
   mssqldata:
   postgresdata:

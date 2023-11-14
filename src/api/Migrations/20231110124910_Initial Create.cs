@@ -38,7 +38,7 @@ namespace api.Migrations
                     Telephone = table.Column<string>(type: "text", nullable: false),
                     Inactive = table.Column<bool>(type: "boolean", nullable: false),
                     PersonalId = table.Column<string>(type: "text", nullable: false),
-                    Image = table.Column<string>(type: "text", nullable: false),
+                    Image = table.Column<string>(type: "text", nullable: true),
                     Discriminator = table.Column<string>(type: "text", nullable: false),
                     ParentId = table.Column<string>(type: "text", nullable: true)
                 },

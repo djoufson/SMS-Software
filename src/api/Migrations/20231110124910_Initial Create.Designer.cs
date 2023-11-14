@@ -11,7 +11,7 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231025080802_Initial Create")]
+    [Migration("20231110124910_Initial Create")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -61,7 +61,6 @@ namespace api.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("Inactive")

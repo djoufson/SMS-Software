@@ -84,7 +84,7 @@ public record UserResponse(
     string Telephone,
     string PersonalId,
     bool Inactive,
-    string Image);
+    string? Image);
 
 public record RegisterUserCommand(
     RegisterUserRequest Request
@@ -102,7 +102,7 @@ public record RegisterUserRequest(
     string Province,
     string Telephone,
     string PersonalId,
-    string Image
+    string? Image
 );
 
 public enum UserType
